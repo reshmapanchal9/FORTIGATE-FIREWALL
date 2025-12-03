@@ -1,0 +1,26 @@
+FortiGate is an advanced next-generation firewall (NGFW) developed by Fortinet, designed to provide 
+unified threat management, secure network segmentation, and deep traffic inspection. It offers a 
+combination of security features such as IPS, web filtering, antivirus, application control, and SSL 
+inspection, accessible through both GUI and CLI. FortiGate is widely used in enterprise and virtualized 
+environments to deliver high-performance network security and centralized visibility, making it ideal for 
+multi-VLAN and multi-segment architectures.
+This project involves the strategic integration of a FortiGate next-generation firewall within a structured 
+virtualized network environment, where three physical firewall interfaces are logically mapped to 
+dedicated virtual switches. Port1 is connected to the WAN_ext external switch, serving as the central 
+transit network for inter-segment communication. Port2 interfaces with vSwitch_Admin, providing secured 
+connectivity for the Admin VM, while Port3 is linked to vSwitch_Attacker, which hosts the Kali Linux 
+attacker VM used for security testing. The FortiGate appliance is administered through both its graphical 
+user interface (GUI) and command-line interface (CLI), enabling precise configuration of routing, 
+segmentation, and security controls essential for maintaining a robust and well-governed network 
+architecture.
+Throughout the project, interfaces were configured, along with address objects, firewall policies, and 
+security profiles. These policies were combined with IPS, web filtering, and application control to ensure 
+safe communication between different segments. The firewall rules were designed to allow legitimate 
+traffic while monitoring, detecting, and blocking harmful behavior. Each security profile attached to the 
+firewall policies enhanced visibility and response capabilities across the network.
+To evaluate the firewall’s effectiveness, multiple test attacks were executed from the Kali Linux attacker 
+VM toward the Admin VM. These included reconnaissance, exploitation attempts, and malicious file 
+transfers. The FortiGate successfully generated detailed logs and security reports, detecting and preventing 
+harmful activities while allowing permitted traffic. This demonstrated the firewall’s capability to secure the 
+environment by providing comprehensive monitoring, threat prevention, and controlled access between 
+network segments
