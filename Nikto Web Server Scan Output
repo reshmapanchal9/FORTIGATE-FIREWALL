@@ -1,0 +1,52 @@
+A Nikto vulnerability assessment was executed from the Attacker VM (Kali Linux – 192.168.20.10) targeting the Admin VM (192.168.10.10), which hosts an HTTP service (Microsoft IIS 10.0) behind the FortiGate firewall.
+
+Command Used
+nikto -h http://192.168.10.10
+
+Scan Findings
+
+The target is running Microsoft IIS/10.0
+
+X-Frame-Options header is missing, making the application susceptible to clickjacking attacks
+
+X-Content-Type-Options header is missing, allowing the browser to perform MIME-type sniffing
+
+No CGI directories were identified
+
+Interpretation
+
+The Nikto scan simulated a real-world attacker probing the internal web server for misconfigurations and security weaknesses.
+These findings highlight missing security headers while also validating the FortiGate firewall’s capability to inspect, detect, and control HTTP-based attack attempts.
+
+2. FortiGate IPS Logs (Detection & Prevention)
+
+During the Nikto scan, the FortiGate firewall successfully detected and blocked the suspicious HTTP traffic originating from Kali. The activity was logged under Security Events → Intrusion Prevention with a severity rating of Critical.
+
+Key Log Details
+
+Source: 192.168.20.10 (Kali Attacker)
+
+Destination: 192.168.10.10 (Admin Web Server)
+
+Service: HTTP (Port 80)
+
+Action: Dropped
+
+Severity: Critical
+
+Policy Direction: Port3 (Attacker) → Port2 (Admin LAN)
+
+Firewall Response
+
+Identified malicious HTTP probes using signature-based IPS
+
+Immediately blocked all suspicious requests
+
+Prevented potential exploitation of missing or weak security headers
+
+Recorded detailed logs including source, destination, protocol, service, and triggered signatures
+
+Why This Matters
+
+This outcome demonstrates that the FortiGate IPS, firewall policies, and security profiles are properly configured and functioning as intended.
+It shows effective real-time mitigation of reconnaissance and vulnerability scanning attempts within the lab environment—reflecting strong network security posture.
