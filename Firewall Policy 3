@@ -1,0 +1,17 @@
+Policy 3: ATTACKER_TO_WAN
+Purpose:
+Allows Attacker VM internet access for:
+• Downloading malware samples (safe lab)
+• Updating tools
+• Launching outbound scans
+Key Configuration:
+• Incoming: ATTACKER (port3)
+• Outgoing: WAN (port1)
+• Source: Attacker-subnet
+• Destination: all
+• Service: ALL
+• NAT: ON (PAT to WAN IP)
+What logs appear?
+• Web Filter logs (if attacker VM opens URLs)
+• IPS logs (if attacker tries malicious outbound traffic)
+• DNS logs (resolver queries)
