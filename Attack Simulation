@@ -1,0 +1,8 @@
+Kali (Attacker VM)
+ │
+ │ Exploit Probes, SMBv1 Scan, SQL Injection Attempt
+ ▼
+FortiGate Firewall
+ │ IPS, Antivirus, App Control, Web Filter
+ ▼
+Admin VM (Victim)
