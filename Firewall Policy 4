@@ -1,0 +1,19 @@
+Policy 4: ADMIN_TO_WAN
+Purpose:
+Provides the Admin VM full internet access for:
+• Browsing
+• Testing web filtering
+• Downloading tools
+• Creating malware attack simulations
+Key Configuration:
+• Incoming: ADMIN_LAN (port2)
+• Outgoing: WAN (port1)
+• Source: Admin-Subnet
+• Destination: all
+• Service: ALL
+• NAT: ON
+Resulting logs:
+• Malware detection logs
+• URL filtering logs
+• AV file quarantine logs
+• IPS alerts for risky downloads
