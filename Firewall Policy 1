@@ -1,0 +1,20 @@
+Policy 1: ADMIN_TO_ATTACKER
+Purpose:
+Allows Admin LAN VM to communicate with the Attacker VM for testing, pings, file 
+transfers, and firewall visibility.
+Key Configuration:
+• Incoming: ADMIN_LAN (port2)
+• Outgoing: ATTACKER (port3)
+• Source: Admin-Subnet
+• Destination: Attacker-Subnet
+• Service: ALL
+• Action: ACCEPT
+• NAT: Enabled
+Why NAT is ON?
+Even for internal traffic, FortiGate may require NAT depending on routing. This prevents 
+asymmetric routing issues.
+What logs are generated?
+• Forward traffic logs (connection start/close)
+• Application logs (if App Control enabled)
+• IPS logs (if attack traffic is detected)
+• Web filter logs (if attacker hosts web services
