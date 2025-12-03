@@ -1,0 +1,62 @@
+To evaluate the effectiveness of the FortiGate security controls, an Nmap-based vulnerability 
+scan was launched from the Attacker VM (Kali Linux) targeting the Admin VM 
+(192.168.10.10). The objective of this test was to simulate reconnaissance activity typically 
+performed by an attacker before exploitation.
+Two scans were executed:
+1. HTTP Vulnerability Detection Scan
+sudo nmap --script http-vuln* 192.168.10.10
+This scan attempts to discover known HTTP-based vulnerabilities.
+The results revealed several open ports (22, 80, 135, 139, 445, 2000, 5060, 5985), 
+demonstrating potential attack surfaces.
+2. Aggressive Service & OS Detection with Vulnerability Scripts
+sudo nmap -sS -sV -O --script vuln 192.168.10.10
+This scan performs:
+• SYN Stealth Scan (-sS)
+• Service Version Detection (-sV)
+• OS Fingerprinting (-O)
+• Vulnerability Enumeration (--script vuln)
+This represents a realistic threat scenario where an attacker attempts to extract:
+• Running services
+• Operating system details
+• Known vulnerabilities
+• Weak configurations
+FortiGate actively monitors such reconnaissance attempts and triggers IPS events when 
+signatures match malicious patterns.
+5.3 Log & Report — IPS Detection
+FortiGate’s IPS (Intrusion Prevention System) successfully detected the Nmap-generated 
+attack patterns and logged them under:
+Log & Report → Security Events → Intrusion Prevention
+Key observations from the IPS logs:
+✔ Attack Source
+• 192.168.20.10 (Attacker VM / Kali Linux)
+✔ Attack Target
+• 192.168.10.10 (Admin VM)
+✔ Severity Level
+• High (based on FortiGuard threat score)
+✔ Detected Threat Example
+• Attack Name: Adobe.XML.Entity.Injection
+• Attack ID: 18162
+• Direction: Outgoing (from attacker subnet to admin subnet)
+• Action: Dropped or Detected depending on policy configuration
+• Profile Used: IPS-Strict
+✔ IPS Response
+The IPS engine recognized malicious scanning signatures triggered by Nmap’s vulnerability 
+scripts.
+Examples of matched patterns include:
+• XML Injection patterns
+• Suspicious HTTP probing
+• Service enumeration attempts
+• SMB probing attempts
+The IPS logs provide detailed metadata:
+• Time of attack
+• Threat severity score
+• Signature ID
+• URL reference to the FortiGuard database
+• Full packet inspection outcome
+Security Significance
+These logs confirm that:
+• The firewall successfully identified the attacker’s reconnaissance activity.
+• IPS signatures matched the scanning behavior.
+• Policies blocked or monitored suspicious packets based on configured security 
+profiles.
+• Administrators can trace each suspicious packet with forensic-level detail
