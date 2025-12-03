@@ -1,0 +1,24 @@
+Policy 2: ATTACKER_TO_ADMIN
+Purpose:
+Allows the Attacker VM to reach the Admin VM. This is required for:
+• Nmap scans
+• SQL injection attacks
+• Metasploit/MSFVenom tests
+• FTP/SSH brute force
+Key Configuration:
+• Incoming: ATTACKER (port3)
+• Outgoing: ADMIN_LAN (port2)
+• Source: Attacker-subnet
+• Destination: Admin-Subnet
+• Service: ALL
+• NAT: ON
+• Action: ACCEPT
+Security Considerations:
+This rule should always have:
+• IPS enabled
+• Application Control enabled
+• Antivirus scanning ON (if file transfers occur)
+What logs appear?
+• IPS alerts (SQLi, SMB exploits, FTP brute force)
+• Application Control logs (Nmap, Hydra, browser traffic)
+• Traffic logs (TCP SYN floods, port scans)
